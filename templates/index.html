@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>视频资源下载</title>
+</head>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+    <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="网址">
+            <el-input v-model="form.url"></el-input>
+        </el-form-item>
+        <el-form-item label="网站">
+            <el-select v-model="form.web" placeholder="请选择所属网站">
+                <el-option v-for="item in options"
+                           :key="item.value"
+                           :label="item.label"
+                           :value="item.value"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="命名">
+            <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="路径">
+            <el-input v-model="form.path"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">下载</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            options: [
+                {
+                    label: '蚂蚁影视',
+                    value: 'mayiyingshi'
+                }
+            ],
+            form: {
+                url: '',
+                web: '',
+                name: '',
+                path: ''
+            }
+        },
+        created() {
+            this.form.web = this.options[0].value
+        },
+        methods: {
+            onSubmit() {
+                axios.post('/download', this.form)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    })
+</script>
+</html>
