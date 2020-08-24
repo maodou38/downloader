@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 from tqdm import tqdm
 from faker import Faker
-from retry import retry
+#from retry import retry
 
 urllib3.disable_warnings()
 

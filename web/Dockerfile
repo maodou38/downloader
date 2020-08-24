@@ -8,7 +8,7 @@ WORKDIR /downloader
 
 #安装所需依赖
 # RUN apk update && apk upgrade && apk add --update --no-cache g++ gcc libxslt-dev python3-dev openssl-dev && apk add --no-cache gcc musl-dev libxslt-dev && pip install -r requirement.txt -i https://mirrors.aliyun.com/pypi/simple
-RUN apk update && apk upgrade && apk add --no-cache gcc musl-dev libxslt-dev && pip install -r requirement.txt -i https://mirrors.aliyun.com/pypi/simple
+RUN apk update && apk upgrade &&pip install gunicorn -i https://mirrors.aliyun.com/pypi/simple && pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 EXPOSE 8080
 
-ENTRYPOINT python app.py
+ENTRYPOINT gunicorn -w 4 -b 0.0.0.0:8080 app:app
