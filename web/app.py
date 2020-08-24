@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from flask import render_template
-from WebParser import Parser
+from web.WebParser import Parser
 import json
-from m3u8 import Downloader
+from web.m3u8 import Downloader
 from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
