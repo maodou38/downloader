@@ -3,7 +3,7 @@ MAINTAINER roiding<dingran@ran-ding.ga>
 #修改使用阿里云镜像库
 RUN echo -e "https://mirrors.aliyun.com/alpine/latest-stable/community/\nhttps://mirrors.aliyun.com/alpine/latest-stable/main/" >/etc/apk/repositories
 
-COPY . /downloader
+COPY ./web /downloader
 WORKDIR /downloader
 
 #安装所需依赖
