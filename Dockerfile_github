@@ -1,0 +1,12 @@
+FROM python:3.8-alpine
+MAINTAINER roiding<dingran@ran-ding.ga>
+
+
+COPY ./web /downloader
+WORKDIR /downloader
+
+#安装所需依赖
+RUN apk update && apk upgrade &&pip install gunicorn && pip install -r requirements.txt
+EXPOSE 8080
+
+ENTRYPOINT gunicorn -w 4 -b 0.0.0.0:8080 app:app
